@@ -13,12 +13,10 @@ window.onload = () => {
     }
 
     function handleDrop(event) {
-        // this pickups the parent form of an element
-        let parentNode = event?.srcElement?.parentElement?.parentElement;
-        let uploadFiles = event.dataTransfer;
-        // set let form to EVENTS PARENT NODE
-        let formData = new FormData(parentNode);
-        formData.append('file', uploadFiles);
+        let inputNode = event?.srcElement?.children;
+        let uploadFiles = event.dataTransfer.files;
+        inputNode = inputNode[0];
+        inputNode.files = uploadFiles;
     }
 
     const DRAG_AND_DROP_BOX_CLASS = 'dragAndDropBox';
