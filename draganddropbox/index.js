@@ -17,13 +17,12 @@ window.onload = () => {
         inputArea.className = 'dragAndDrop-input-field-neutral';
     }
 
-    function handleDrop(event, fileList) {
+    function handleDrop(event, fileList, fileIcon) {
         let dragFiles = event?.dataTransfer?.files;
         dragFiles = Boolean(dragFiles && dragFiles[0]);
         let buttonFiles = event?.srcElement.files;
         buttonFiles = Boolean(buttonFiles && buttonFiles[0]);
         let inputNode = event?.srcElement?.children;
-        console.log(event.srcElement);
         if (dragFiles && inputNode && inputNode[0]) {
             let uploadFiles = event?.dataTransfer?.files;
             const inputFile = uploadFiles[0];
@@ -33,10 +32,12 @@ window.onload = () => {
             inputNode = inputNode[0];
             if (uploadFiles && uploadFiles[0]) {
                 inputNode.files = uploadFiles;
+                fileIcon.remove();
             }
         } else if (buttonFiles) {
             let inputFile = event.srcElement.files[0];
             fileList.innerText = `${inputFile.name} (${inputFile.size}kb)`;
+            fileIcon.remove();
         }
     }
 
@@ -48,6 +49,8 @@ window.onload = () => {
         let inputWrapper = document.createElement('div');
         let fileList = document.createElement('div');
         let inputField = document.createElement('input');
+        let fileIcon = document.createElement('div');
+
 
         actions.forEach(key => {
             inputWrapper.addEventListener(key, preventDefaultActions, false);
@@ -61,17 +64,19 @@ window.onload = () => {
             inputWrapper.addEventListener(key, e => unHighlight(e, inputWrapper, inputField), false);
         });
 
-        inputField.addEventListener('change', e => handleDrop(e, fileList), false);
+        inputField.addEventListener('change', e => handleDrop(e, fileList, fileIcon), false);
 
-        inputWrapper.addEventListener('drop', e => handleDrop(e, fileList), false);
+        inputWrapper.addEventListener('drop', e => handleDrop(e, fileList, fileIcon), false);
 
         inputField.type = 'file';
         inputField.name = 'file';
         inputField.className = 'dragAndDrop-input-field-neutral';
         inputWrapper.className = 'dragAndDropBox-input-wrapper';
         fileList.className = 'dragAnDropBox-file-list';
+        fileIcon.className = 'gg-file-document';
 
         inputWrapper.appendChild(inputField);
+        inputWrapper.appendChild(fileIcon);
         dropBox.appendChild(inputWrapper);
         dropBox.appendChild(fileList);
     });
