@@ -15,7 +15,7 @@
 .dragAndDropBox-input-wrapper {
     width: 100%;
     height: 100%;
-    border: 2px dashed #CACACA;
+    border: 2px dashed #868686;
     border-radius: 8px;
     margin: 32px;
     display: flex;
@@ -24,5 +24,39 @@
 }
 
 .highlight {
+    position: relative;
     background: #ffffff !important;
+}
+
+.dragAndDrop-input-field-neutral {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.dragAndDrop-input-field-active {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+}
+
+.dragAnDropBox-file-list {
+    position: absolute;
+    color: #868686;
+    font-size: 24px;
+}
+
+.dragAndDropBox-information-text {
+    position: absolute;
+}
+
+.dragAndDropBox-information-text {
+    position: absolute;
+    user-select: none;
+    pointer-events: none;
+    font-size: 21px;
+    color: #868686;
 }
